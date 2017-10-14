@@ -38,12 +38,11 @@ class Media {
 }
 
 class Book extends Media {
-  constructor(author, title, pages) {
-    super(title);
+  constructor(author, title, pages, ratings, isCheckedOut) {
+    super(title, isCheckedOut, ratings);
     this._author = author;
     this._pages = pages;
-    super(isCheckedOut);
-    super(ratings);
+
   }
 
     get author() {
@@ -55,14 +54,51 @@ class Book extends Media {
   };
 
   getAverageRating(){
-
+    let total = 0;
+    this._ratings.forEach(function(rating){
+      let total = total + rating;
+    })
+    let result = total / this._ratings.length;
   };
 
-  toggleCheckOutStatus() {
-
-  };
+ toggleCheckOutStatus() {
+    this._isCheckedOut= !this._isCheckedOut;
+  }
 
   addRating(){
 
   };
 }
+
+class Movie extends Media{
+  constructor(director, title, runTime, isCheckedOut, ratings){
+    super(title);
+    this._director = director;
+    this._runTime = runTime;
+    super(isCheckedOut);
+    super(ratings);
+  }
+
+  get director() {
+    return this._director
+  }
+
+  get runTime() {
+    return this._runTime
+  }
+
+   getAverageRating(){
+
+  };
+
+ toggleCheckOutStatus() {
+    this._isCheckedOut= !this._isCheckedOut;
+  }
+
+  addRating(){
+
+  };
+}
+
+let historyOfEverything = new Book('Bill Bryson', 'A Short History of Nearly Everything', 544);
+console.log(historyOfEverything);
